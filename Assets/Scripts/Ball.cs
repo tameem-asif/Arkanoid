@@ -9,8 +9,10 @@ public class Ball : MonoBehaviour {
 	{
 		GetComponent<Rigidbody2D>().velocity = Vector2.up*speed;
 	}
-	void OnCollisionEnter(Collision2D col)
+
+	void OnCollisionEnter2D(Collision2D col)
 	{
+		Debug.Log("On Collision");
 		if(col.gameObject.name == "racket")
 		{
 			float x = hitFactor(transform.position,
@@ -20,9 +22,16 @@ public class Ball : MonoBehaviour {
 
 			GetComponent<Rigidbody2D>().velocity = dir*speed;
 		}
+		if(col.gameObject.name == "border_top"||col.gameObject.name == "border_right"||col.gameObject.name == "border_left")
+		{
+			Debug.Log("Hit wall and sped up");
+			GetComponent<Rigidbody2D>().velocity = Vector2.down*speed;
+		}
 	}
+	
 	float hitFactor(Vector2 ballPos, Vector2 racketPos, float racketWidth)
 	{
+		Debug.Log("hit factor");
 		return(ballPos.x - racketPos.x)/racketWidth;
 	}
 }
