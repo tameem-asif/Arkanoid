@@ -34,4 +34,13 @@ public class Ball : MonoBehaviour {
 		Debug.Log("hit factor");
 		return(ballPos.x - racketPos.x)/racketWidth;
 	}
+
+	/*void FixedUpdate()
+	{
+		if((GameObject.Find("racket").transform.position.y)<GameObject.Find("ball").transform.position.y)
+		{
+			Debug.Log("Trying to quit");
+			Application.Quit();
+		}
+	}*/
 }
