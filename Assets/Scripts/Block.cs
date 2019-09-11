@@ -5,6 +5,12 @@ using UnityEngine;
 public class Block : MonoBehaviour {
 	public bool isFalling = false;
 	float speed = 5f;
+	Vector2 posRack = Vector2.zero;
+
+	void Start()
+	{
+		posRack = GameObject.Find("racket").transform.position;
+	}
 	void OnCollisionEnter2D(Collision2D collisionInfo)
 	{
 		if(isFalling == false)
@@ -17,6 +23,11 @@ public class Block : MonoBehaviour {
 			Debug.Log("destroying");
 			Destroy(gameObject);
 		}
+		if(collisionInfo.gameObject.name == "racket")
+		{
+			Debug.Log("quit because racket");
+			Application.Quit();
+		}
 	}
 	
 	void FixedUpdate()
@@ -24,10 +35,13 @@ public class Block : MonoBehaviour {
 		if(isFalling == true)
 		{
 			Vector2 newPos = gameObject.transform.position;
-			newPos.y += 5;
-
+			newPos.y += -.1f;
 			gameObject.transform.position = newPos;
-
+		}
+		if(gameObject.transform.position.y<=posRack.y)
+		{
+			Debug.Log("Block out of game");
+			Application.Quit();
 		}
 	}
 }

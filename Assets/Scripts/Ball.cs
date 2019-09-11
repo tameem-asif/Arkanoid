@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class Ball : MonoBehaviour {
 	public float speed = 100.0f;
-	// Use this for initialization
+	Vector2 rackPos = Vector2.zero;
 	void Start ()
 	{
 		GetComponent<Rigidbody2D>().velocity = Vector2.up*speed;
+		rackPos = GameObject.Find("racket").transform.position;
 	}
 
 	void OnCollisionEnter2D(Collision2D col)
@@ -24,23 +25,21 @@ public class Ball : MonoBehaviour {
 		}
 		if(col.gameObject.name == "border_top"||col.gameObject.name == "border_right"||col.gameObject.name == "border_left")
 		{
-			Debug.Log("Hit wall and sped up");
 			GetComponent<Rigidbody2D>().velocity = Vector2.down*speed;
 		}
 	}
 	
 	float hitFactor(Vector2 ballPos, Vector2 racketPos, float racketWidth)
 	{
-		Debug.Log("hit factor");
 		return(ballPos.x - racketPos.x)/racketWidth;
 	}
 
-	/*void FixedUpdate()
+	void FixedUpdate()
 	{
-		if((GameObject.Find("racket").transform.position.y)<GameObject.Find("ball").transform.position.y)
+		if(gameObject.transform.position.y<=rackPos.y)
 		{
-			Debug.Log("Trying to quit");
+			Debug.Log("Ball out of bounds");
 			Application.Quit();
 		}
-	}*/
+	}
 }
