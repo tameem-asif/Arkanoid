@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Ball : MonoBehaviour {
 	public float speed = 100.0f;
@@ -39,7 +40,7 @@ public class Ball : MonoBehaviour {
 		if(gameObject.transform.position.y<=rackPos.y)
 		{
 			Debug.Log("Ball out of bounds");
-			Application.Quit();
+			SceneManager.LoadScene("RestartScreen");
 		}
 	}
 }

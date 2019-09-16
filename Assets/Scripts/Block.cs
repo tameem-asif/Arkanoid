@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Block : MonoBehaviour {
 	public bool isFalling = false;
@@ -26,7 +27,7 @@ public class Block : MonoBehaviour {
 		if(collisionInfo.gameObject.name == "racket")
 		{
 			Debug.Log("quit because racket");
-			Application.Quit();
+			SceneManager.LoadScene("RestartScreen");
 		}
 	}
 	
@@ -41,7 +42,7 @@ public class Block : MonoBehaviour {
 		if(gameObject.transform.position.y<=posRack.y)
 		{
 			Debug.Log("Block out of game");
-			Application.Quit();
+			SceneManager.LoadScene("RestartScreen");
 		}
 	}
 }
